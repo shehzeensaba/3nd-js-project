@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel Count Search </title>
+    <link rel="icon" type="image/icon" href="favicon-32x32.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* margin-top: 50px; */
+            background-size: cover;
+            object-fit: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url("https://img.freepik.com/free-vector/gradient-pink-green-background_52683-110638.jpg?t=st=1731348730~exp=1731349330~hmac=ebd6de5e082f242f45035c3904cda8a99566b042e5655c3e26164312b770daca&w=826");
+        }
+
+        h1 {
+            color:black;
+            font-size: 36px;
+            margin: 20px;
+        }
+
+        #inputArea {
+            margin-bottom: 10px;
+        }
+
+        #inputText {
+            width: 88%;
+            padding: 10px;
+            font-size: 14px;
+            text-align: center;
+            border: 3px solid black;
+        
+        }
+
+        #countButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #068373;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #results {
+            margin-top: 20px;
+            width: 240px;
+            padding: 20px;
+            background: #f4f4f4;
+            border-radius: 5px;
+            border: 3px solid black;
+        }
+
+        .resultItem {
+            margin: 5px 0;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Vowel Count Search</h1>
+
+        <div id="inputArea">
+
+            <input id="inputText" type="text" placeholder="Enter strings separated by a comma (,)">
+            <button id="countButton">Count Vowels</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+
+        function countVowels(text) {
+            const vowels = "aeiouAEIOU";
+            let count = 0;
+            for (let char of text) {
+                if (vowels.includes(char)) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        document.getElementById('countButton').addEventListener('click', function () {
+            const inputText = document.getElementById('inputText').value;
+            const strings = inputText.split(',').map(str => str.trim());
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = "";
+
+            strings.forEach(text => {
+                const count = countVowels(text);
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('resultItem');
+                resultItem.textContent = `${text} has ${count} vowels.`;
+                resultsDiv.appendChild(resultItem);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
